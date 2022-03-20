@@ -40,3 +40,7 @@
 .ele_inline {
   display: inline
 }
+
+.hoverBtn {
+  font-size: calc(2px + 2vmin);
+}
