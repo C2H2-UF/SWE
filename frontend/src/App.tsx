@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import SearchBar from './Search';
+
 
 
 function TickerBtn(props: { onClick: () => void, value: number}) {
@@ -30,6 +32,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <SearchBar></SearchBar>
         <TickerBtn onClick={() => btnClick()} value={value}/>
         <a
           className="App-link"
@@ -41,6 +44,8 @@ function App() {
         </a>
       </header>
     </div>
+
+     
   );
 }
 

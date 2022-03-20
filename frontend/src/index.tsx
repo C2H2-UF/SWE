@@ -1,11 +1,13 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Search from './Search';
 import reportWebVitals from './reportWebVitals';
 
+//Render multiple components by just adding them to the array.
 ReactDOM.render(
-    <App />,
+    [ <App />,
+    ],
   document.getElementById('root')
 );
 
