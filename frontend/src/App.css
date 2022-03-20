@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.hoverBtn {
+  font-size: calc(2px + 2vmin);
+}

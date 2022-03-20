@@ -32,8 +32,9 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <SearchBar></SearchBar>
+        <SearchBar/>
         <TickerBtn onClick={() => btnClick()} value={value}/>
+        <HoverBtn/>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -48,5 +49,27 @@ function App() {
      
   );
 }
+
+//Button that appears on hover
+function HoverBtn() {
+  const [style, setStyle] = useState({display: 'none'});
+
+  return (
+      <div className="hoverBtn">
+          <div style={{border: '1px solid gray', width: 100, height: 20, padding: 0, margin: 1}}
+               onMouseEnter={e => {
+                   setStyle({display: 'inline'});
+               }}
+               onMouseLeave={e => {
+                   setStyle({display: 'none'})
+               }}
+          >
+            <button className = 'inLine' style={style}>x</button> 
+            testing
+          </div>
+      </div>
+  );
+}
+
 
 export default App
