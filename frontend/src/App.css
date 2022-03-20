@@ -44,3 +44,9 @@
 .hoverBtn {
   font-size: calc(2px + 2vmin);
 }
+
+.SearchBar{
+  position: absolute;
+  top: 100px;
+  left: 200px;
+}
