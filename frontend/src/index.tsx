@@ -1,12 +1,34 @@
+import {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Search from './Search';
+import SearchBar from './Search';
 import reportWebVitals from './reportWebVitals';
+
+
+  const renderVar = {
+    toRender: "App",
+  };
+  export {renderVar};
+
+  function RenderManager(props : any) {
+    const toRender = props.toRender;
+    if(props.renderType == "App")
+    {
+      return <App/>;
+    }
+    else if(props.renderType == "SearchBar")
+    {
+      return <SearchBar/>;
+    }
+    else 
+      return <></>;
+  }
+
 
 //Render multiple components by just adding them to the array.
 ReactDOM.render(
-    [ <App />,
+    [  <RenderManager renderType={renderVar.toRender}/>,
     ],
   document.getElementById('root')
 );
