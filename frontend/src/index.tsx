@@ -3,7 +3,6 @@ import './index.css';
 import App from './App';
 import SearchBar from './Search';
 import reportWebVitals from './reportWebVitals';
-import { render } from '@testing-library/react';
 
 
 let renderVar = {
