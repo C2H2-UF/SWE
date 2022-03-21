@@ -1,10 +1,3 @@
-import React, { useState } from 'react';
-import './App.css';
-
-const Search = () => {
-  return <div> Hello World!</div>
-}
-
 const SearchBar = () => (
   <form action="/" method="get" className = "SearchBar">
       <label htmlFor="header-search">

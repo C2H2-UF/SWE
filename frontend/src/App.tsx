@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {renderVar} from './index';
 import SearchBar from './Search';
 import { isPropertySignature } from 'typescript';
 
@@ -36,12 +35,6 @@ const ButtonGroup = () => {
 };
 */
 
-function changeRenders(newRender : string)
-{
-  console.log("HIIII");
-  renderVar.toRender = "SearchBar";
-}
-
 function App() {
 
   const [value, setValue] = useState<number>(0)
@@ -57,14 +50,12 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <SearchBar/>
         <TickerBtn onClick={() => btnClick()} value={value}/>
         <button onClick={bullyGrace}>Bully Grace</button>
         <a href="https://www.youtube.com/c/helarious" target="_blank">
           <button> Subscribe! </button>
         </a>
         <HoverBtn/>
-        <button onClick={() => changeRenders("SearchBar")}>Change to only Search</button>
         <a
           className="App-link"
           href="https://reactjs.org"

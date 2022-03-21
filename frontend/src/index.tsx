@@ -1,37 +1,54 @@
-import {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import SearchBar from './Search';
 import reportWebVitals from './reportWebVitals';
+import { render } from '@testing-library/react';
 
 
-  const renderVar = {
-    toRender: "App",
-  };
-  export {renderVar};
+let renderVar = {
+  toRender: "App",
+  nextRender: "SearchBar",
+}
 
-  function RenderManager(props : any) {
-    const toRender = props.toRender;
-    if(props.renderType == "App")
-    {
-      return <App/>;
-    }
-    else if(props.renderType == "SearchBar")
-    {
-      return <SearchBar/>;
-    }
-    else 
-      return <></>;
+function changeRenderState(){
+  if(renderVar.toRender == "App")
+  {
+    ReactDOM.render(
+      <div>
+        <App/>
+        <SearchBar/>  
+        <button onClick = {() => changeRenderState()}> Change render state </button>
+      </div>,
+    document.getElementById('root')
+    );
+    renderVar.toRender = "SearchBar";
+    
   }
-
+  else if(renderVar.toRender == "SearchBar")
+  {
+    ReactDOM.render(
+      <div>
+        <SearchBar/>  
+        <button onClick = {() => changeRenderState()}> Change render state </button>
+      </div>,
+    document.getElementById('root')
+    );
+    renderVar.toRender = "App";
+  }
+}
 
 //Render multiple components by just adding them to the array.
 ReactDOM.render(
-    [  <RenderManager renderType={renderVar.toRender}/>,
-    ],
+  <div>
+    <App/>
+    <SearchBar/>  
+    <button onClick = {() => changeRenderState()}> Change render state </button>
+  </div>,
   document.getElementById('root')
 );
+
+    
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
