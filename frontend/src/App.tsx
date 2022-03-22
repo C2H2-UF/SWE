@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import SearchBar from './Search';
 import { isPropertySignature } from 'typescript';
+import { render } from '@testing-library/react';
 
 
 
@@ -38,11 +39,16 @@ const ButtonGroup = () => {
 function App() {
 
   const [value, setValue] = useState<number>(0)
+  const [renderWin, setRenderWin] = useState("App");
 
+  useEffect(() =>{
+    
+  });
   const btnClick = () => {
     setValue(value+1)
   }
 
+  if(renderWin == "App"){
   return (
     <div className="App">
       <header className="App-header">
@@ -56,6 +62,7 @@ function App() {
           <button> Subscribe! </button>
         </a>
         <HoverBtn/>
+        <button onClick = {() => setRenderWin("SearchBar")}>Change to SearchBar</button> 
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -69,6 +76,14 @@ function App() {
 
      
   );
+  }
+  else 
+    return(
+      <div>
+      <SearchBar/>
+      <button onClick = {() => setRenderWin("App")}>Change to App</button>
+      </div>
+    );
 }
 
 //Button that appears on hover
