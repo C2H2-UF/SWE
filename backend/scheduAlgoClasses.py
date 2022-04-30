@@ -183,7 +183,11 @@ class Course:
         return staticMeetSection
 
 
-"""
+rows = 14  # number of periods in the schedule
+
+
+class Schedule:
+    """
     Schedule object for creating sample schedules
 
     parameters:
@@ -195,11 +199,8 @@ class Course:
         addSection: adds a section to the schedule
         conflict: checks if a section conflicts with the current schedule
 
-"""
-rows = 14  # number of periods in the schedule
+    """
 
-
-class Schedule:
     def __init__(
         self,
         template: Dict[str, list[str]] = {
@@ -223,7 +224,8 @@ class Schedule:
         """
         Online sections can just be added w/o conflicts
 
-        For other sections, create a copy of the schedule and try to add to that
+        For other sections, create a copy of the schedule and try to add all
+        of the time slots in section.meetings to that copy
         If successful, update template to include the section
         """
         if section.isOnline() and self.template["ONLINE"].count(courseID) == 0:
