@@ -28,7 +28,7 @@ describe(App, () => {
         expect(container.firstChild.className).toBe('CourseListing')
     })
 
-    it('change page', () => {
+    it('attempt change page w/o classes', () => {
         
         act(() => {
             render(<App/>, container)
@@ -38,6 +38,7 @@ describe(App, () => {
         act(() => {
             button.dispatchEvent(new MouseEvent('click', {bubbles:true}))
         });
-        expect(container.firstChild.className).toBe('Schedule')
+        expect(container.firstChild.className).toBe('CourseListing')
     })
+    
 })
