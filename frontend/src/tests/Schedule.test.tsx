@@ -9,6 +9,14 @@ import ScheduleListing from '../Schedule/ScheduleListing'
 let container: any = null
 
 const mockfn = jest.fn()
+const scheduleListing = 
+    <ScheduleListing 
+        setRenderWin={mockfn}  
+        courseList={[]} 
+        colorMap={new Map<string, string>()} 
+        setColorMap={mockfn} 
+        filteredTimes={[]}
+    />
 
 beforeEach(() => {
     // setup a DOM element as a render target
@@ -21,4 +29,16 @@ afterEach(() => {
     unmountComponentAtNode(container);
     container.remove();
     container = null;
+});
+
+describe(ScheduleListing, () => {
+    it('loads defaults', () => {
+        
+        act(() => {
+            render(scheduleListing, container)
+        })
+        
+        const selCourse: Element | null = document.getElementById('Schedule-header')
+        expect(selCourse?.childElementCount).toBe(1)
+    })
 });
