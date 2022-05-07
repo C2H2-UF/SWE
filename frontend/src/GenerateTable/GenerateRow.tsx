@@ -36,7 +36,7 @@ export function GenerateRow(
             else{
                 index = parseInt(props.periodSlot.period)-1 //indicies[0-10] for sections [1-11]
             }
-            cellArr.push(<GenerateCell courseID={(props.schedule.template as any)[key][index]} colorMap={props.colorMap}/>)
+            cellArr.push(<GenerateCell courseID={(props.schedule.template as any)[key][index]} color={props.colorMap.get((props.schedule.template as any)[key][index])}/>)
         }  
     };
         

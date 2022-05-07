@@ -41,7 +41,7 @@ function Calendar(
                 {props.schedule.template.ONLINE.map((courseID =>(
                         <GenerateOnline 
                             courseID={courseID} 
-                            colorMap={props.colorMap}
+                            color={props.colorMap.get(courseID)}
                             height = {rowHeight}
                         />
                         ))
