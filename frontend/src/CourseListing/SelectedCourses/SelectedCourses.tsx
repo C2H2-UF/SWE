@@ -3,11 +3,11 @@ import HoverBtn from "./HoverButton";
 
 //Displays all of the courses selected by the user.
 export function SelectedCourses(props: {
-  courseList: Course[];
-  deletable: boolean;
-  DeleteCourse: (courseID: string) => void;
-  colorMap: Map<string, string>;
-  setColorMap: (colorMap: Map<string, string>) => void;
+  courseList: Course[],
+  deletable: boolean,
+  DeleteCourse: (courseID: string) => void,
+  colorMap: Map<string, string>,
+  setColorMap: (colorMap: Map<string, string>) => void,
 }) {
   let courseBtns: JSX.Element[] = [];
   let temp: number = 5.5;

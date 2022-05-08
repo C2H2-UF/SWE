@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
     "prettier": "^2.6.2"
   },
   "scripts": {
@@ -62,6 +63,15 @@
     ],
     "*.{js,jsx,ts,tsx,json}": [
       "prettier --write"
-    ]
+    ],
+    "*.--write": "prettier --write"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": false,
+    "tabWidth": 4
+
   }
 }
