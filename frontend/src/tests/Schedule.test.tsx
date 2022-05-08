@@ -37,8 +37,7 @@ describe(ScheduleListing, () => {
         act(() => {
             render(scheduleListing, container)
         })
-        
-        const selCourse: Element | null = document.getElementById('Schedule-header')
-        expect(selCourse?.childElementCount).toBe(1)
+        const selCourse: Element | null = document.getElementById('loading')
+        expect(selCourse?.childElementCount).toBe(0)
     })
 });

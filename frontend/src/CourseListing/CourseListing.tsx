@@ -91,9 +91,9 @@ function CourseListing(
 
     return (
         <div className="CourseListing">
-            <header className="Schedule-header">
+            <header className="Schedule-header" id="Schedule-header">
 
-                <div className="ToggleSchedule">
+                <div className="ToggleSchedule" id="ToggleSchedule">
                     <button onClick={handleClick}>
                         See Sample Schedules
                     </button>

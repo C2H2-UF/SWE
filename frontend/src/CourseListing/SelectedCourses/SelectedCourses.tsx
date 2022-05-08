@@ -35,7 +35,7 @@ export function SelectedCourses(
     return (
         <div className='listCourses'>
             List of Courses
-            <div id='courseListButtons'>
+            <div id='CourseListButtons'>
                 {courseBtns}
             </div>
         </div>
