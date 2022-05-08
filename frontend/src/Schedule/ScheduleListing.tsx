@@ -1,13 +1,13 @@
-import SelectedCourses from "../CourseListing/SelectedCourses/SelectedCourses";
-import Calendar from "./Calendar";
-import { Course, Schedule, Template } from "../Course";
-import { TimeSlot } from "../UF";
-import { useState } from "react";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import loading from "../Images/loading.gif";
+import SelectedCourses from '../CourseListing/SelectedCourses/SelectedCourses'
+import Calendar from './Calendar'
+import { Course, Schedule, Template } from '../Course'
+import { TimeSlot } from '../UF'
+import { useState } from 'react'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import loading from '../Images/loading.gif'
 
 interface ScheduleResponse {
-  schedules: Schedule[];
+  schedules: Schedule[]
 }
 
 /*Example schedules used to visually verify output before frontend could make API calls to the backend 
@@ -35,34 +35,34 @@ let samples = [sampleSchedule1, sampleSchedule2];
 */
 
 function ScheduleListing(props: {
-  setRenderWin: (state: string) => void;
-  courseList: Course[];
-  colorMap: Map<string, string>;
-  setColorMap: (colorMap: Map<string, string>) => void;
-  filteredTimes: TimeSlot[];
+  setRenderWin: (state: string) => void
+  courseList: Course[]
+  colorMap: Map<string, string>
+  setColorMap: (colorMap: Map<string, string>) => void
+  filteredTimes: TimeSlot[]
 }) {
-  const [i, setI] = useState<number>(0);
-  const [sampleSchedules, setSampleSchedules] = useState<Schedule[]>([]);
+  const [i, setI] = useState<number>(0)
+  const [sampleSchedules, setSampleSchedules] = useState<Schedule[]>([])
 
   //Make API call to run the schedule builder algo. and return a list of sample schedules
   const getSampleSchedules = async () => {
     const options = {
-      url: "http://localhost:8000/buildSchedule/",
+      url: 'http://localhost:8000/buildSchedule/',
       data: {
         courses: props.courseList,
         times: props.filteredTimes,
       },
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      } as AxiosRequestConfig["headers"],
-    };
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      } as AxiosRequestConfig['headers'],
+    }
     const response = await axios.post<any, AxiosResponse<ScheduleResponse>>(
       options.url,
       options.data,
-      options.headers
-    );
-    let schedList: Schedule[] = [];
+      options.headers,
+    )
+    let schedList: Schedule[] = []
 
     //check if sampleSchedules has already been populated, if so don't run this again.
     if (sampleSchedules.length == 0) {
@@ -75,11 +75,11 @@ function ScheduleListing(props: {
           F: response.data.schedules[key].template.F,
           S: response.data.schedules[key].template.S,
           ONLINE: response.data.schedules[key].template.ONLINE,
-        };
+        }
         const sched: Schedule = {
           template: temp,
-        };
-        schedList.push(sched);
+        }
+        schedList.push(sched)
       }
       //If an empty list (or no list) was returned,
       if (schedList.length == 0) {
@@ -93,19 +93,19 @@ function ScheduleListing(props: {
             S: [],
             ONLINE: [],
           },
-        };
+        }
         //For if we don't want to immediately send them back to CourseListing
         //schedList.push(sched)
         alert(
-          "Sorry, there are no viable schedules based on the given parameters." +
-            "\n\nPlease change your courses or reserved times and try again"
-        );
-        props.setRenderWin("Courses");
+          'Sorry, there are no viable schedules based on the given parameters.' +
+            '\n\nPlease change your courses or reserved times and try again',
+        )
+        props.setRenderWin('Courses')
       }
-      console.log(schedList);
-      setSampleSchedules(schedList);
+      console.log(schedList)
+      setSampleSchedules(schedList)
     }
-  };
+  }
 
   /*Purpose: Called when a user clicks Prev or Next schedule button
                Changes the index used to call a schedule from sampleSchedule
@@ -115,29 +115,29 @@ function ScheduleListing(props: {
     */
   const onChangeSample = (isNext: boolean) => {
     if (isNext) {
-      setI(i + 1);
+      setI(i + 1)
     } else if (i - 1 < 0) {
-      setI(sampleSchedules.length - 1);
+      setI(sampleSchedules.length - 1)
     } else {
-      setI(i - 1);
+      setI(i - 1)
     }
-  };
+  }
 
   //If we haven't recieved something from the API yet, show a loading screen
   //Else, display the ScheduleListing page
   if (sampleSchedules.length == 0) {
-    getSampleSchedules();
+    getSampleSchedules()
     return (
       <div className="Schedule-header">
         <img id="loading" src={loading} width="100vh" height="100vh" />
       </div>
-    );
+    )
   } else {
     return (
       <div className="Schedule">
         <header className="Schedule-header">
           <div className="ToggleCourses">
-            <button onClick={() => props.setRenderWin("Courses")}>
+            <button onClick={() => props.setRenderWin('Courses')}>
               See Courses
             </button>
           </div>
@@ -161,14 +161,14 @@ function ScheduleListing(props: {
             <div className="nextPrev">
               <button
                 onClick={(e) => {
-                  onChangeSample(false);
+                  onChangeSample(false)
                 }}
               >
                 Prev Schedule
               </button>
               <button
                 onClick={(e) => {
-                  onChangeSample(true);
+                  onChangeSample(true)
                 }}
               >
                 Next Schedule
@@ -177,8 +177,8 @@ function ScheduleListing(props: {
           </div>
         </header>
       </div>
-    );
+    )
   }
 }
 
-export default ScheduleListing;
+export default ScheduleListing

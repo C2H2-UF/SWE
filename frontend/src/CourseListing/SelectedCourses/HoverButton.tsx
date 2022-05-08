@@ -1,24 +1,28 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 //Creates a button that appears when a defined region is hovered
 function HoverBtn(props: {
-  courseID: string;
-  top: string;
-  deletable: boolean;
-  delete: () => void;
-  color: string;
+  courseID: string
+  top: string
+  deletable: boolean
+  delete: () => void
+  color: string
 }) {
-  const [style, setStyle] = useState({ display: "none", fontSize: "2.5vh" });
+  const [style, setStyle] = useState({ display: 'none', fontSize: '2.5vh' })
 
   return (
     <div
       className="hoverBtn"
-      style={{ position: "absolute", top: props.top, background: props.color }}
+      style={{
+        position: 'absolute',
+        top: props.top,
+        background: props.color,
+      }}
       onMouseEnter={(e) => {
-        if (props.deletable) setStyle({ display: "inline", fontSize: "2.5vh" });
+        if (props.deletable) setStyle({ display: 'inline', fontSize: '2.5vh' })
       }}
       onMouseLeave={(e) => {
-        setStyle({ display: "none", fontSize: "2.5vh" });
+        setStyle({ display: 'none', fontSize: '2.5vh' })
       }}
     >
       <button className="inLine" style={style} onClick={props.delete}>
@@ -26,7 +30,7 @@ function HoverBtn(props: {
       </button>
       {props.courseID}
     </div>
-  );
+  )
 }
 
-export default HoverBtn;
+export default HoverBtn

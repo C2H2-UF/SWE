@@ -1,12 +1,12 @@
-import React from "react";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Course } from "../../Course";
+import React from 'react'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { Course } from '../../Course'
 
 interface CourseResponse {
-  COURSES: Course[];
-  LASTCONTROLNUMBER: number;
-  RETRIEVEDROWS: number;
-  TOTALROWS: number;
+  COURSES: Course[]
+  LASTCONTROLNUMBER: number
+  RETRIEVEDROWS: number
+  TOTALROWS: number
 }
 
 function SearchBar(props: { AddCourse: (course: Course) => void }) {
@@ -15,53 +15,53 @@ function SearchBar(props: { AddCourse: (course: Course) => void }) {
 
     */
   const getInputValue = (
-    event: React.KeyboardEvent<HTMLInputElement> | undefined
+    event: React.KeyboardEvent<HTMLInputElement> | undefined,
   ) => {
     //guard clauses
     if (!event) {
-      return;
+      return
     }
-    if (event.key !== "Enter") {
-      return;
+    if (event.key !== 'Enter') {
+      return
     }
 
-    const userValue = event.currentTarget.value.toUpperCase();
+    const userValue = event.currentTarget.value.toUpperCase()
 
     if (!validateInput(userValue)) {
       //Notify on a bad entry
-      alert("'" + userValue + "' is not a valid course!");
-      event.preventDefault(); // Stop page from refreshing after pressing enter
-      return;
+      alert("'" + userValue + "' is not a valid course!")
+      event.preventDefault() // Stop page from refreshing after pressing enter
+      return
     }
 
-    getClasses(userValue);
+    getClasses(userValue)
 
-    event.currentTarget.value = ""; // Clear search bar
-    event.preventDefault(); // Stop page from refreshing after pressing enter
-  };
+    event.currentTarget.value = '' // Clear search bar
+    event.preventDefault() // Stop page from refreshing after pressing enter
+  }
 
   //Purpose: make an API call to find the user-specified course in the schedule of courses
   async function getClasses(courseCode: string): Promise<any> {
     let options = {
       body: { courseCode: courseCode },
-      url: "http://localhost:8000/class/", // change port if necessary
+      url: 'http://localhost:8000/class/', // change port if necessary
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      } as AxiosRequestConfig["headers"],
-    };
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      } as AxiosRequestConfig['headers'],
+    }
     const response = await axios.put<any, AxiosResponse<CourseResponse[]>>(
       options.url,
       options.body,
-      options.headers
-    );
+      options.headers,
+    )
 
-    const data: CourseResponse = response.data[0];
+    const data: CourseResponse = response.data[0]
     if (data.RETRIEVEDROWS == 0) {
-      alert(courseCode + " is not in our database for this semester!");
+      alert(courseCode + ' is not in our database for this semester!')
     } else {
-      const course: Course = data.COURSES[0];
-      props.AddCourse(course);
+      const course: Course = data.COURSES[0]
+      props.AddCourse(course)
     }
   }
 
@@ -72,30 +72,30 @@ function SearchBar(props: { AddCourse: (course: Course) => void }) {
 
     //Check length of input
     if (input.length < 7 || input.length > 8) {
-      return false;
+      return false
     }
     //Check for a Lab Code at the end
     else if (
       input.length === 8 &&
-      input.charAt(7) !== "C" &&
-      input.charAt(7) !== "L"
+      input.charAt(7) !== 'C' &&
+      input.charAt(7) !== 'L'
     ) {
-      return false;
+      return false
     }
 
     //Check that prefix has only letters
-    var prefix = input.substring(0, 3);
+    var prefix = input.substring(0, 3)
     if (!/^[A-Z]+$/.test(prefix)) {
-      return false;
+      return false
     }
     //Check that the code has 4 digits after the prefix
-    var digits = input.substring(3, 7);
+    var digits = input.substring(3, 7)
     if (!/^[0-9]+$/.test(digits)) {
-      return false;
+      return false
     }
 
-    return true;
-  };
+    return true
+  }
 
   return (
     <form action="/" method="get">
@@ -107,7 +107,7 @@ function SearchBar(props: { AddCourse: (course: Course) => void }) {
         onKeyPress={getInputValue}
       />
     </form>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar

@@ -1,13 +1,13 @@
-import Semester from "./Semester";
-import SearchBar from "./SearchBar";
-import FilterCalendar from "./FilterCalendar";
-import { Course } from "../../Course";
-import { TimeSlot } from "../../UF";
+import Semester from './Semester'
+import SearchBar from './SearchBar'
+import FilterCalendar from './FilterCalendar'
+import { Course } from '../../Course'
+import { TimeSlot } from '../../UF'
 
 function SearchOptions(props: {
-  AddCourse: (course: Course) => void;
-  filteredTimes: TimeSlot[];
-  setFilteredTimes: (filteredTimes: TimeSlot[]) => void;
+  AddCourse: (course: Course) => void
+  filteredTimes: TimeSlot[]
+  setFilteredTimes: (filteredTimes: TimeSlot[]) => void
 }) {
   return (
     <div id="searchOptions" className="searchOptions">
@@ -19,7 +19,7 @@ function SearchOptions(props: {
         setFilteredTimes={props.setFilteredTimes}
       />
     </div>
-  );
+  )
 }
 
-export default SearchOptions;
+export default SearchOptions

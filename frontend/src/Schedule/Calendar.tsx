@@ -1,33 +1,33 @@
-import { Table, TableBody } from "@material-ui/core";
-import { TableContainer, TableHead } from "@material-ui/core";
-import { Paper } from "@material-ui/core";
-import { Schedule } from "../Course";
-import { periodList } from "../UF";
-import { GenerateHeader } from "../GenerateTable/GenerateHeader";
-import { GenerateRow } from "../GenerateTable/GenerateRow";
-import { GenerateOnline } from "../GenerateTable/GenerateOnline";
+import { Table, TableBody } from '@material-ui/core'
+import { TableContainer, TableHead } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
+import { Schedule } from '../Course'
+import { periodList } from '../UF'
+import { GenerateHeader } from '../GenerateTable/GenerateHeader'
+import { GenerateRow } from '../GenerateTable/GenerateRow'
+import { GenerateOnline } from '../GenerateTable/GenerateOnline'
 
 function Calendar(
   // Reference for schedule calendar:
   // https://github.com/Luc-Olsthoorn/Registr/blob/master/server/src/client/Calendar.js
   props: {
-    schedule: Schedule;
-    colorMap: Map<string, string>;
-    scheduleNum: number;
-  }
+    schedule: Schedule
+    colorMap: Map<string, string>
+    scheduleNum: number
+  },
 ) {
-  let rowNum: number = props.schedule.template.ONLINE.length + 15;
-  let rowHeight: number = 84.45 / rowNum;
+  let rowNum: number = props.schedule.template.ONLINE.length + 15
+  let rowHeight: number = 84.45 / rowNum
   //Return a single sample schedule
   return (
     <TableContainer
       component={Paper}
-      style={{ maxHeight: "84.5vh", minHeight: "84.5vh" }}
+      style={{ maxHeight: '84.5vh', minHeight: '84.5vh' }}
     >
       <Table size="small">
         <TableHead>
           <GenerateHeader
-            headerType={"schedule"}
+            headerType={'schedule'}
             height={rowHeight}
             num={props.scheduleNum}
           />
@@ -53,7 +53,7 @@ function Calendar(
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  )
 }
 
-export default Calendar;
+export default Calendar
