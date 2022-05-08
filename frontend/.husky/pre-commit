@@ -1,5 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo \”[Husky] pre-commit\”
-#npm run test -- --watchAll=false
+cd frontend && npm test
