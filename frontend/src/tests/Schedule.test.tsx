@@ -41,4 +41,3 @@ describe(ScheduleListing, () => {
         expect(selCourse?.childElementCount).toBe(0)
     })
 });
-//Testing husky
