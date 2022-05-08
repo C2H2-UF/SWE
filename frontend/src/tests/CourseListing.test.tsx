@@ -1,87 +1,88 @@
-import '@testing-library/jest-dom'
-import { fireEvent } from '@testing-library/react';
+import "@testing-library/jest-dom";
+import { fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Container, render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import CourseListing from '../CourseListing/CourseListing'
+import CourseListing from "../CourseListing/CourseListing";
 
-let container: any = null
+let container: any = null;
 
-const mockfn = jest.fn()
-const courseListing = 
-    <CourseListing 
-        setRenderWin={mockfn} 
-        setCourseList={mockfn} 
-        courseList={[]} 
-        colorMap={new Map<string, string>()} 
-        setColorMap={mockfn} 
-        filteredTimes={[]}
-        setFilteredTimes={mockfn}
-    />
+const mockfn = jest.fn();
+const courseListing = (
+  <CourseListing
+    setRenderWin={mockfn}
+    setCourseList={mockfn}
+    courseList={[]}
+    colorMap={new Map<string, string>()}
+    setColorMap={mockfn}
+    filteredTimes={[]}
+    setFilteredTimes={mockfn}
+  />
+);
 
 beforeEach(() => {
-    // setup a DOM element as a render target
-    container = document.createElement("div");
-    document.body.appendChild(container);
+  // setup a DOM element as a render target
+  container = document.createElement("div");
+  document.body.appendChild(container);
 });
 
 afterEach(() => {
-    // cleanup on exiting
-    unmountComponentAtNode(container);
-    container.remove();
-    container = null;
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
 });
 
-
 describe(CourseListing, () => {
-    it('loads defaults', () => {
-        
-        act(() => {
-            render(courseListing, container)
-        })
-        const selCourse: Element | null = document.getElementById('Schedule-header')
-        //check that the only child is the course list
-        expect(selCourse?.childElementCount).toBe(4)
-        expect(selCourse?.firstElementChild?.id).toBe('ToggleSchedule')
+  it("loads defaults", () => {
+    act(() => {
+      render(courseListing, container);
+    });
+    const selCourse: Element | null =
+      document.getElementById("Schedule-header");
+    //check that the only child is the course list
+    expect(selCourse?.childElementCount).toBe(4);
+    expect(selCourse?.firstElementChild?.id).toBe("ToggleSchedule");
 
-        //button list is empty
-        const courseButtons: Element | null = document.getElementById('CourseListButtons')
-        expect(courseButtons?.childElementCount).toBe(0)
-    })
+    //button list is empty
+    const courseButtons: Element | null =
+      document.getElementById("CourseListButtons");
+    expect(courseButtons?.childElementCount).toBe(0);
+  });
 
-    it('input takes input and clears', () => {
-        //mount component on DOM
-        act(() => {
-            render(courseListing, container)
-        })
-        //find input element
-        const input: Element | null = document.getElementById('searchBar')
-        if (input == null) {
-            throw new Error('input Element is null')
-        }
+  it("input takes input and clears", () => {
+    //mount component on DOM
+    act(() => {
+      render(courseListing, container);
+    });
+    //find input element
+    const input: Element | null = document.getElementById("searchBar");
+    if (input == null) {
+      throw new Error("input Element is null");
+    }
 
-        //add test to input field
-        act(() => {
-            userEvent.type(input, 'cis')
-        });
-        expect(input).toHaveValue('cis')
+    //add test to input field
+    act(() => {
+      userEvent.type(input, "cis");
+    });
+    expect(input).toHaveValue("cis");
 
-        //add more text
-        act(() => {
-            userEvent.type(input, '4301')
-        });
-        expect(input).toHaveValue('cis4301')
+    //add more text
+    act(() => {
+      userEvent.type(input, "4301");
+    });
+    expect(input).toHaveValue("cis4301");
 
-        //test enter keystroke to submit input
-        //and clear input field
-        act(() => {
-            fireEvent.submit(input)
-        });
-        expect(input.textContent).toBe('')
-    })
+    //test enter keystroke to submit input
+    //and clear input field
+    act(() => {
+      fireEvent.submit(input);
+    });
+    expect(input.textContent).toBe("");
+  });
 
-    /*NO LONGER WORKS WITH RELIANCE ON A VALIDATION RESPONSE FROM BACKEND
+  /*NO LONGER WORKS WITH RELIANCE ON A VALIDATION RESPONSE FROM BACKEND
     it('adds button to list', () => {
         act(() => {
             render(courseListing, container)
@@ -141,4 +142,4 @@ describe(CourseListing, () => {
         expect(courseButtons?.childElementCount).toBe(0)
     })
     */
-})
+});
