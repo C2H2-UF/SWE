@@ -88,7 +88,7 @@ function CourseListing(props: {
     } else {
       alert('Please add some courses')
     }
-  };
+  }
 
   return (
     <div className="CourseListing">

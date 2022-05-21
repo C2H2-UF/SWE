@@ -1,5 +1,4 @@
 import { render, unmountComponentAtNode } from 'react-dom'
-import { act } from 'react-dom/test-utils'
 
 import App from '../App'
 
@@ -20,21 +19,16 @@ afterEach(() => {
 
 describe(App, () => {
   it('loads default page', () => {
-    act(() => {
-      render(<App />, container)
-    })
+    render(<App />, container)
     expect(container.firstChild.className).toBe('CourseListing')
   })
 
   it('attempt change page w/o classes', () => {
-    act(() => {
-      render(<App />, container)
-    })
+    render(<App />, container)
     const button: Element = container.querySelector('button')
 
-    act(() => {
-      button.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-    })
+    button.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+
     expect(container.firstChild.className).toBe('CourseListing')
   })
 })

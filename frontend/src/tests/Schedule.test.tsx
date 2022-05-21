@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
 import { fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Container, render, unmountComponentAtNode } from 'react-dom'
-import { act } from 'react-dom/test-utils'
+import { render, screen } from '@testing-library/react'
+import { Container, unmountComponentAtNode } from 'react-dom'
 
 import ScheduleListing from '../Schedule/ScheduleListing'
 
@@ -34,10 +34,8 @@ afterEach(() => {
 
 describe(ScheduleListing, () => {
   it('loads defaults', () => {
-    act(() => {
-      render(scheduleListing, container)
-    })
-    const selCourse: Element | null = document.getElementById('loading')
-    expect(selCourse?.childElementCount).toBe(0)
+    render(scheduleListing, container)
+
+    expect(screen.getByRole('img').childElementCount).toBe(0)
   })
 })
