@@ -4,15 +4,16 @@ import { TableCell, Typography } from '@material-ui/core'
 export function GenerateCell(props: {
   courseID: string
   color: string | undefined
+  rowSpan: number
+  colSpan: number
 }) {
   //let color: string | undefined = "white"
   let id: string = props.courseID
+  
   if (props.courseID == 'reserved') {
     id = ''
-  } else if (props.courseID == '') {
-    props.color = 'white'
   }
-
+ 
   return (
     <TableCell
       align="center"
@@ -24,6 +25,10 @@ export function GenerateCell(props: {
         fontSize: 12,
         background: props.color,
       }}
+      rowSpan={props.rowSpan}
+      colSpan={props.colSpan}
+      onClick={() => {}}
+      onMouseEnter={() => {}}
     >
       <Typography style={{ color: 'white' }}>{id}</Typography>
     </TableCell>
@@ -31,3 +36,4 @@ export function GenerateCell(props: {
 }
 
 export default GenerateCell
+

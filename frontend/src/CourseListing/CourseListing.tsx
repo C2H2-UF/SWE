@@ -19,13 +19,13 @@ let colors = [
 
 //Displays the CourseListing page
 function CourseListing(props: {
-  setRenderWin: (state: string) => void,
-  setCourseList: (courseList: Course[]) => void,
-  courseList: Course[],
-  colorMap: Map<string, string>,
-  setColorMap: (colorMap: Map<string, string>) => void,
-  filteredTimes: TimeSlot[],
-  setFilteredTimes: (filteredTimes: TimeSlot[]) => void,
+  setRenderWin: (state: string) => void
+  setCourseList: (courseList: Course[]) => void
+  courseList: Course[]
+  colorMap: Map<string, string>
+  setColorMap: (colorMap: Map<string, string>) => void
+  filteredTimes: TimeSlot[]
+  setFilteredTimes: (filteredTimes: TimeSlot[]) => void
 }) {
   const DeleteCourse = (courseID: string) => {
     let index = -1

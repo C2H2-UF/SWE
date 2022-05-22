@@ -135,48 +135,48 @@ function ScheduleListing(props: {
   } else {
     return (
       <div className="Schedule">
-        <header className="Schedule-header">
-          <div className="ToggleCourses">
-            <button onClick={() => props.setRenderWin('Courses')}>
-              See Courses
+      <header className="Schedule-header">
+        <div className="ToggleCourses">
+          <button onClick={() => props.setRenderWin('Courses')}>
+            See Courses
+          </button>
+        </div>
+
+        <SelectedCourses
+          courseList={props.courseList}
+          deletable={false}
+          DeleteCourse={() => {}}
+          colorMap={props.colorMap}
+          setColorMap={props.setColorMap}
+        />
+
+        <div className="searchOptions">Course Info</div>
+
+        <div className="courses">
+          <Calendar
+            schedule={sampleSchedules[i % sampleSchedules.length]}
+            colorMap={props.colorMap}
+            scheduleNum={(i % sampleSchedules.length) + 1}
+          />
+          <div className="nextPrev">
+            <button
+              onClick={(e) => {
+                onChangeSample(false)
+              }}
+            >
+              Prev Schedule
+            </button>
+            <button
+              onClick={(e) => {
+                onChangeSample(true)
+              }}
+            >
+              Next Schedule
             </button>
           </div>
-
-          <SelectedCourses
-            courseList={props.courseList}
-            deletable={false}
-            DeleteCourse={() => {}}
-            colorMap={props.colorMap}
-            setColorMap={props.setColorMap}
-          />
-
-          <div className="searchOptions">Course Info</div>
-
-          <div className="courses">
-            <Calendar
-              schedule={sampleSchedules[i % sampleSchedules.length]}
-              colorMap={props.colorMap}
-              scheduleNum={(i % sampleSchedules.length) + 1}
-            />
-            <div className="nextPrev">
-              <button
-                onClick={(e) => {
-                  onChangeSample(false)
-                }}
-              >
-                Prev Schedule
-              </button>
-              <button
-                onClick={(e) => {
-                  onChangeSample(true)
-                }}
-              >
-                Next Schedule
-              </button>
-            </div>
-          </div>
-        </header>
-      </div>
+        </div>
+      </header>
+    </div>
     )
   }
 }

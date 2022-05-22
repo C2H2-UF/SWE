@@ -4,8 +4,8 @@ import { Paper } from '@material-ui/core'
 import { Schedule } from '../Course'
 import { periodList } from '../UF'
 import { GenerateHeader } from '../GenerateTable/GenerateHeader'
-import { GenerateRow } from '../GenerateTable/GenerateRow'
 import { GenerateOnline } from '../GenerateTable/GenerateOnline'
+import { GenScheduleDisplay } from '../GenerateTable/GenScheduleDisplay'
 
 function Calendar(
   // Reference for schedule calendar:
@@ -18,8 +18,29 @@ function Calendar(
 ) {
   let rowNum: number = props.schedule.template.ONLINE.length + 15
   let rowHeight: number = 84.45 / rowNum
+  
   //Return a single sample schedule
   return (
+    <GenScheduleDisplay
+      schedule={props.schedule}
+      colorMap={props.colorMap}
+      height={rowHeight}
+      num={props.scheduleNum}
+    />
+  )
+}
+
+export default Calendar
+
+/*
+    <GenScheduleDisplay
+      schedule={props.schedule}
+      colorMap={props.colorMap}
+      height={rowHeight}
+      num={props.scheduleNum}
+    />
+*/
+/*
     <TableContainer
       component={Paper}
       style={{ maxHeight: '84.5vh', minHeight: '84.5vh' }}
@@ -53,7 +74,4 @@ function Calendar(
         </TableBody>
       </Table>
     </TableContainer>
-  )
-}
-
-export default Calendar
+*/
