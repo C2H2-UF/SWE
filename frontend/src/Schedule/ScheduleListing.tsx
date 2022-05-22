@@ -10,30 +10,6 @@ interface ScheduleResponse {
   schedules: Schedule[]
 }
 
-/*Example schedules used to visually verify output before frontend could make API calls to the backend 
-let sample1 = new Map<string, string[]>();
-sample1.set("M", ["", "", "", "CIS4301", "", "", "", "", "", "", "", "", "", ""]);
-sample1.set("T", ["", "", "", "", "", "", "", "COP4600", "COP4600", "", "", "", "", ""]);
-sample1.set("W", ["", "", "", "CIS4301", "", "", "", "", "", "", "", "COP4600", "", ""]);
-sample1.set("R", ["", "", "", "", "", "", "", "", "COP4600", "", "", "", "", ""]);
-sample1.set("F", ["", "", "", "CIS4301", "", "", "", "", "", "", "", "", "", ""]);
-sample1.set("S", ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]);
-sample1.set("ONLINE", ["EEL3872", "CAP3027"])
-
-let sample2 = new Map<string, string[]>();
-sample2.set("M", ["", "", "MAA4402", "", "", "COP4020", "", "CEN3031", "", "", "", "", "", ""]);
-sample2.set("T", ["", "", "EGS4034", "CEN3031", "", "", "", "", "", "", "", "", "", ""]);
-sample2.set("W", ["", "", "MAA4402", "", "", "COP4020", "", "CEN3031", "", "", "", "", "", ""]);
-sample2.set("R", ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]);
-sample2.set("F", ["", "", "MAA4402", "", "", "COP4020", "", "CEN3031", "", "", "", "", "", ""]);
-sample2.set("S", ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]);
-sample2.set("ONLINE", ["MAS3114"])
-
-let sampleSchedule1 = { template: sample1 };
-let sampleSchedule2 = { template: sample2 };
-let samples = [sampleSchedule1, sampleSchedule2];
-*/
-
 function ScheduleListing(props: {
   setRenderWin: (state: string) => void
   courseList: Course[]
@@ -135,50 +111,74 @@ function ScheduleListing(props: {
   } else {
     return (
       <div className="Schedule">
-      <header className="Schedule-header">
-        <div className="ToggleCourses">
-          <button onClick={() => props.setRenderWin('Courses')}>
-            See Courses
-          </button>
-        </div>
-
-        <SelectedCourses
-          courseList={props.courseList}
-          deletable={false}
-          DeleteCourse={() => {}}
-          colorMap={props.colorMap}
-          setColorMap={props.setColorMap}
-        />
-
-        <div className="searchOptions">Course Info</div>
-
-        <div className="courses">
-          <Calendar
-            schedule={sampleSchedules[i % sampleSchedules.length]}
-            colorMap={props.colorMap}
-            scheduleNum={(i % sampleSchedules.length) + 1}
-          />
-          <div className="nextPrev">
-            <button
-              onClick={(e) => {
-                onChangeSample(false)
-              }}
-            >
-              Prev Schedule
-            </button>
-            <button
-              onClick={(e) => {
-                onChangeSample(true)
-              }}
-            >
-              Next Schedule
+        <header className="Schedule-header">
+          <div className="ToggleCourses">
+            <button onClick={() => props.setRenderWin('Courses')}>
+              See Courses
             </button>
           </div>
-        </div>
-      </header>
-    </div>
+
+          <SelectedCourses
+            courseList={props.courseList}
+            deletable={false}
+            DeleteCourse={() => {}}
+            colorMap={props.colorMap}
+            setColorMap={props.setColorMap}
+          />
+
+          <div className="searchOptions">Course Info</div>
+
+          <div className="courses">
+            <Calendar
+              schedule={sampleSchedules[i % sampleSchedules.length]}
+              colorMap={props.colorMap}
+              scheduleNum={(i % sampleSchedules.length) + 1}
+            />
+            <div className="nextPrev">
+              <button
+                onClick={(e) => {
+                  onChangeSample(false)
+                }}
+              >
+                Prev Schedule
+              </button>
+              <button
+                onClick={(e) => {
+                  onChangeSample(true)
+                }}
+              >
+                Next Schedule
+              </button>
+            </div>
+          </div>
+        </header>
+      </div>
     )
   }
 }
 
 export default ScheduleListing
+
+/*Example schedules used to visually verify output before frontend could make API calls to the backend 
+let sample1 = new Map<string, string[]>();
+sample1.set("M", ["", "", "", "CIS4301", "", "", "", "", "", "", "", "", "", ""]);
+sample1.set("T", ["", "", "", "", "", "", "", "COP4600", "COP4600", "", "", "", "", ""]);
+sample1.set("W", ["", "", "", "CIS4301", "", "", "", "", "", "", "", "COP4600", "", ""]);
+sample1.set("R", ["", "", "", "", "", "", "", "", "COP4600", "", "", "", "", ""]);
+sample1.set("F", ["", "", "", "CIS4301", "", "", "", "", "", "", "", "", "", ""]);
+sample1.set("S", ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]);
+sample1.set("ONLINE", ["EEL3872", "CAP3027"])
+
+let sample2 = new Map<string, string[]>();
+sample2.set("M", ["", "", "MAA4402", "", "", "COP4020", "", "CEN3031", "", "", "", "", "", ""]);
+sample2.set("T", ["", "", "EGS4034", "CEN3031", "", "", "", "", "", "", "", "", "", ""]);
+sample2.set("W", ["", "", "MAA4402", "", "", "COP4020", "", "CEN3031", "", "", "", "", "", ""]);
+sample2.set("R", ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]);
+sample2.set("F", ["", "", "MAA4402", "", "", "COP4020", "", "CEN3031", "", "", "", "", "", ""]);
+sample2.set("S", ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]);
+sample2.set("ONLINE", ["MAS3114"])
+
+let sampleSchedule1 = { template: sample1 };
+let sampleSchedule2 = { template: sample2 };
+let samples = [sampleSchedule1, sampleSchedule2];
+*/

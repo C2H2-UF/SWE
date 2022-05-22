@@ -9,11 +9,11 @@ export function GenerateCell(props: {
 }) {
   //let color: string | undefined = "white"
   let id: string = props.courseID
-  
+
   if (props.courseID == 'reserved') {
     id = ''
   }
- 
+
   return (
     <TableCell
       align="center"
@@ -36,4 +36,3 @@ export function GenerateCell(props: {
 }
 
 export default GenerateCell
-

@@ -18,7 +18,7 @@ function Calendar(
 ) {
   let rowNum: number = props.schedule.template.ONLINE.length + 15
   let rowHeight: number = 84.45 / rowNum
-  
+
   //Return a single sample schedule
   return (
     <GenScheduleDisplay
@@ -31,47 +31,3 @@ function Calendar(
 }
 
 export default Calendar
-
-/*
-    <GenScheduleDisplay
-      schedule={props.schedule}
-      colorMap={props.colorMap}
-      height={rowHeight}
-      num={props.scheduleNum}
-    />
-*/
-/*
-    <TableContainer
-      component={Paper}
-      style={{ maxHeight: '84.5vh', minHeight: '84.5vh' }}
-    >
-      <Table size="small">
-        <TableHead>
-          <GenerateHeader
-            headerType={'schedule'}
-            height={rowHeight}
-            num={props.scheduleNum}
-          />
-        </TableHead>
-
-        <TableBody>
-          {periodList.map((row) => (
-            <GenerateRow
-              periodSlot={row}
-              schedule={props.schedule}
-              colorMap={props.colorMap}
-              height={rowHeight}
-            />
-          ))}
-
-          {props.schedule.template.ONLINE.map((courseID) => (
-            <GenerateOnline
-              courseID={courseID}
-              color={props.colorMap.get(courseID)}
-              height={rowHeight}
-            />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-*/

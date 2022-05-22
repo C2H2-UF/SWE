@@ -29,38 +29,45 @@ export function GenScheduleDisplay(props: {
     let rowIndex = spliceIndex / 6
     //console.log(rowIndex +": ", rowArray)
 
-    console.log("before: " + spliceIndex)
+    //    console.log('before: ' + spliceIndex)
     //Generate an array of cells for one row
-    console.log(rowArray)
+    //    console.log(rowArray)
     let cellArr: JSX.Element[] = rowArray.map((course, index) => {
-      if(course == "REMOVE"){
-        return (<></>)
+      if (course == 'REMOVE') {
+        return <></>
       }
 
-      let i: number = spliceIndex+index
+      let i: number = spliceIndex + index
       let rowSize: number = 1
       console.log(course)
       //Account for multi-period class times
-      while (course != "" && scheduleArray[i + 6] == course) {
+      while (course != '' && scheduleArray[i + 6] == course) {
         rowSize++
-        scheduleArray[i + 6] = "REMOVE"
+        scheduleArray[i + 6] = 'REMOVE'
         i += 6
       }
-      console.log(rowIndex + ": " + rowSize)
+      //      console.log(rowIndex + ': ' + rowSize)
       return (
-        <GenerateCell courseID={course} rowSpan={rowSize} colSpan={1} color={props.colorMap.get(course)} />
+        <GenerateCell
+          courseID={course}
+          rowSpan={rowSize}
+          colSpan={1}
+          color={props.colorMap.get(course)}
+        />
       )
     }) //End of non-online cell creation for this row
     spliceIndex += 6
-    console.log("after: " + spliceIndex)
+    //    console.log('after: ' + spliceIndex)
 
     //Add time display to row
-    cellArr.splice(0,0,
+    cellArr.splice(
+      0,
+      0,
       <TableCell scope="row" style={{ width: '12%', fontSize: '1.75vh' }}>
-      <b>{periodList[rowIndex].period + ': '}</b>
+        <b>{periodList[rowIndex].period + ': '}</b>
 
-      {periodList[rowIndex].time}
-      </TableCell>
+        {periodList[rowIndex].time}
+      </TableCell>,
     )
     let newRow: JSX.Element = (
       <TableRow style={{ height: relHeight }}>{cellArr}</TableRow>
@@ -82,7 +89,7 @@ export function GenScheduleDisplay(props: {
   )
 
   rows.concat(onlineArray)
-  
+
   return (
     <TableContainer
       component={Paper}
@@ -107,13 +114,24 @@ export function GenScheduleDisplay(props: {
 //Every 14 indices represents one period/row (across the entire week)
 //i.e. 0-13 represents Period 1 from 7:25-815 across the entire week
 /*
-      M  |[  0 - 13,
-      T  |  14 - 27.
-      W  |  28 - 41,
-      R  |  42 - 55,
-      F  |  56 - 69,
-      S  |  70 - 83,
-  ONLINE |  84 - end  ]
+       1  |[  0 -  5,
+       2  |   6 - 11,
+       3  |  12 - 17,
+       4  |  18 - 23,
+       5  |  24 - 29,
+       6  |  30 - 35,
+       7  |  36 - 41,
+       8  |  42 - 47,
+       9  |  48 - 53,
+      10  |  54 - 59
+      11  |  60 - 65,
+      E1  |  66 - 71,
+      E2  |  72 - 77,
+      E3  |  78 - 83
+      --------------
+ Online(?)|  84 - end ]
+      
+
 */
 function schedMapToArray(schedule: Schedule) {
   const scheduleArray: string[] = []
@@ -132,8 +150,9 @@ function schedMapToArray(schedule: Schedule) {
         i += 6
       }
     })
-    if(key!= 'ONLINE')
+    if (key != 'ONLINE') {
       index++
+    }
   }
   return scheduleArray
 }
