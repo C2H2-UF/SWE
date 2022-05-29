@@ -13,60 +13,60 @@ export interface PeriodSlot {
 
 const periodList: PeriodSlot[] = [
   {
-    period: '1',
-    time: ' 7:25 - 8:15',
+    period: '01',
+    time: ' 07:25 - 08:15',
   },
   {
-    period: '2',
-    time: ' 8:30 - 9:20',
+    period: '02',
+    time: ' 08:30 - 09:20',
   },
   {
-    period: '3',
-    time: ' 9:35 - 10:25',
+    period: '03',
+    time: ' 09:35 - 10:25',
   },
   {
-    period: '4',
+    period: '04',
     time: ' 10:40 - 11:30',
   },
   {
-    period: '5',
+    period: '05',
     time: ' 11:45 - 12:35',
   },
   {
-    period: '6',
-    time: ' 12:50 - 1:40',
+    period: '06',
+    time: ' 12:50 - 01:40',
   },
   {
-    period: '7',
-    time: ' 1:55 - 2:45',
+    period: '07',
+    time: ' 01:55 - 02:45',
   },
   {
-    period: '8',
-    time: ' 3:00 - 3:50',
+    period: '08',
+    time: ' 03:00 - 03:50',
   },
   {
-    period: '9',
-    time: ' 4:05 - 4:55',
+    period: '09',
+    time: ' 04:05 - 04:55',
   },
   {
     period: '10',
-    time: ' 5:10 - 6:00',
+    time: ' 05:10 - 06:00',
   },
   {
     period: '11',
-    time: ' 6:15 - 7:05',
+    time: ' 06:15 - 07:05',
   },
   {
     period: 'E1',
-    time: ' 7:20 - 8:10',
+    time: ' 07:20 - 08:10',
   },
   {
     period: 'E2',
-    time: ' 8:20 - 9:10',
+    time: ' 08:20 - 09:10',
   },
   {
     period: 'E3',
-    time: ' 9:20 - 10:10',
+    time: ' 09:20 - 10:10',
   },
 ]
 export { periodList }

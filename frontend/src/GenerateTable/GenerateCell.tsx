@@ -22,7 +22,7 @@ export function GenerateCell(props: {
       style={{
         width: '12%',
         height: '1vh',
-        fontSize: 12,
+        fontSize: '10.75vh',
         background: props.color,
       }}
       rowSpan={props.rowSpan}

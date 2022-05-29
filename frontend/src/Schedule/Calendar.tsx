@@ -1,10 +1,4 @@
-import { Table, TableBody } from '@material-ui/core'
-import { TableContainer, TableHead } from '@material-ui/core'
-import { Paper } from '@material-ui/core'
 import { Schedule } from '../Course'
-import { periodList } from '../UF'
-import { GenerateHeader } from '../GenerateTable/GenerateHeader'
-import { GenerateOnline } from '../GenerateTable/GenerateOnline'
 import { GenScheduleDisplay } from '../GenerateTable/GenScheduleDisplay'
 
 function Calendar(

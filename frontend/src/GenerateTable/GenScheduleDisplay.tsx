@@ -1,10 +1,9 @@
-import { PeriodSlot, days, periodList, TimeSlot } from '../UF'
+import { periodList} from '../UF'
 import { Table, TableBody } from '@material-ui/core'
 import { TableContainer, TableHead } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
 import { GenerateCell } from './GenerateCell'
 import { GenerateHeader } from '../GenerateTable/GenerateHeader'
-import { GenerateOnline } from '../GenerateTable/GenerateOnline'
 import { TableRow, TableCell } from '@material-ui/core'
 import { Schedule } from '../Course'
 
@@ -32,7 +31,7 @@ export function GenScheduleDisplay(props: {
     [],
   ]
 
-  //console.log(props.schedule.template)
+  console.log('template: ', props.schedule.template)
   //Loop through each day in a schedule
   let day: string
   let column: string[]
@@ -60,10 +59,16 @@ export function GenScheduleDisplay(props: {
 
         if (skip > 0) {
           skip--
+          period++
           return
         } else {
-          while (course != '' && courses[i + 1] == course) {
+          while (
+            course != '' &&
+            course != 'reserved' &&
+            courses[i + 1] == course
+          ) {
             rowSpan++
+            console.log(i + ': ' + course)
             courses[i + 1] = 'DELETE'
             i++
             skip++
@@ -100,15 +105,18 @@ export function GenScheduleDisplay(props: {
     //console.log(period + ": ", row)
     let label: JSX.Element
     if (period < 14) {
+
+      //Insert time slot label in leftmost column
       label = (
-        <TableCell scope="row" style={{ width: '13%', fontSize: '1.75vh' }}>
+        <TableCell scope="row" style={{ width: '12%', height: '1vh', fontSize: '1.75vh' }}>
           <b>{periodList[period].period + ': '}</b>
           <span>{periodList[period].time}</span>
         </TableCell>
       )
     } else {
+      //Add online
       label = (
-        <TableCell scope="row" style={{ width: '12%', fontSize: '1.75vh' }}>
+        <TableCell scope="row" style={{ width: '12%', height: '1vh',fontSize: '1.75vh' }}>
           <b>{'Online: '}</b>
         </TableCell>
       )
