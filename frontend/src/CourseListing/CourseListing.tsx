@@ -1,10 +1,9 @@
-import { useState } from 'react'
 import SelectedCourses from './SelectedCourses/SelectedCourses'
 import SearchOptions from './SearchOptions/SearchOptions'
 import { isCourseEqual } from '../Course'
 import { Course } from '../Course'
 import logo from '../Images/ScheduGator.png'
-import { PeriodSlot, TimeSlot } from '../UF'
+import { TimeSlot } from '../UF'
 
 let colors = [
   'Blue',
@@ -112,7 +111,7 @@ function CourseListing(props: {
         />
 
         <div className="center">
-          <img id="logo" src={logo} />
+          <img id="logo" alt="logo" src={logo} />
         </div>
       </header>
     </div>

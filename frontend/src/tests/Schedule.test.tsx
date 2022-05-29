@@ -1,8 +1,6 @@
 import '@testing-library/jest-dom'
-import { fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { render, screen } from '@testing-library/react'
-import { Container, unmountComponentAtNode } from 'react-dom'
+import { unmountComponentAtNode } from 'react-dom'
 
 import ScheduleListing from '../Schedule/ScheduleListing'
 
@@ -32,7 +30,7 @@ afterEach(() => {
   container = null
 })
 
-describe(ScheduleListing, () => {
+describe('ScheduleListing', () => {
   it('loads defaults', () => {
     render(scheduleListing, container)
 

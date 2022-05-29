@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
+import { unmountComponentAtNode } from 'react-dom'
 import userEvent from '@testing-library/user-event'
-import { Container, unmountComponentAtNode } from 'react-dom'
-
 import CourseListing from '../CourseListing/CourseListing'
 
 let container: any = null
@@ -21,7 +20,7 @@ const courseListing = (
 )
 
 render(courseListing)
-/*
+
 beforeEach(() => {
   // setup a DOM element as a render target
   container = document.createElement('div')
@@ -33,9 +32,9 @@ afterEach(() => {
   unmountComponentAtNode(container)
   container.remove()
   container = null
-})*/
+})
 
-describe(CourseListing, () => {
+describe('CourseListing', () => {
   it('loads defaults', () => {
     //check that the only child is the course list
     expect(screen.getAllByRole('button').length).toBeLessThanOrEqual(1)

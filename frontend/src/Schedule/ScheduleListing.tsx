@@ -105,7 +105,13 @@ function ScheduleListing(props: {
     getSampleSchedules()
     return (
       <div className="Schedule-header">
-        <img id="loading" src={loading} width="100vh" height="100vh" />
+        <img
+          id="loading"
+          alt="loading"
+          src={loading}
+          width="100vh"
+          height="100vh"
+        />
       </div>
     )
   } else {

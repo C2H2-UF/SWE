@@ -17,7 +17,7 @@ afterEach(() => {
   container = null
 })
 
-describe(App, () => {
+describe('App', () => {
   it('loads default page', () => {
     render(<App />, container)
     expect(container.firstChild.className).toBe('CourseListing')

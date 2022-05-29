@@ -9,7 +9,7 @@ export function GenerateHeader(props: {
 }) {
   let relHeight: string = props.height.toString() + 'vh'
 
-  if (props.headerType == 'filter') {
+  if (props.headerType === 'filter') {
     return (
       <TableRow style={{ height: '3vh' }}>
         <TableCell
@@ -37,7 +37,7 @@ export function GenerateHeader(props: {
         ))}
       </TableRow>
     )
-  } else if (props.headerType == 'schedule') {
+  } else if (props.headerType === 'schedule') {
     return (
       <TableRow style={{ height: relHeight }}>
         <TableCell style={{ padding: 0 }} align="center">

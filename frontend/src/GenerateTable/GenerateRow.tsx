@@ -1,8 +1,6 @@
-import { PeriodSlot, days, periodList, TimeSlot } from '../UF'
+import { days, TimeSlot } from '../UF'
 import { TableCell } from '@material-ui/core'
-import { GenerateCell } from './GenerateCell'
 import { TableRow } from '@material-ui/core'
-import { Schedule } from '../Course'
 
 export function FilterRow(props: {
   filteredTimes: TimeSlot[]

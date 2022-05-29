@@ -1,4 +1,4 @@
-import { periodList} from '../UF'
+import { periodList } from '../UF'
 import { Table, TableBody } from '@material-ui/core'
 import { TableContainer, TableHead } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
@@ -105,10 +105,12 @@ export function GenScheduleDisplay(props: {
     //console.log(period + ": ", row)
     let label: JSX.Element
     if (period < 14) {
-
       //Insert time slot label in leftmost column
       label = (
-        <TableCell scope="row" style={{ width: '12%', height: '1vh', fontSize: '1.75vh' }}>
+        <TableCell
+          scope="row"
+          style={{ width: '12%', height: '1vh', fontSize: '1.75vh' }}
+        >
           <b>{periodList[period].period + ': '}</b>
           <span>{periodList[period].time}</span>
         </TableCell>
@@ -116,7 +118,17 @@ export function GenScheduleDisplay(props: {
     } else {
       //Add online
       label = (
-        <TableCell scope="row" style={{ width: '12%', height: '1vh',fontSize: '1.75vh' }}>
+        <TableCell
+          align="center"
+          padding="none"
+          scope="row"
+          style={{
+            width: '12%',
+            height: '1vh',
+            fontSize: '1.75vh',
+            background: 'white',
+          }}
+        >
           <b>{'Online: '}</b>
         </TableCell>
       )
