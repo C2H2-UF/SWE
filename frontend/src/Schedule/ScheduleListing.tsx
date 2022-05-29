@@ -78,7 +78,7 @@ function ScheduleListing(props: {
         )
         props.setRenderWin('Courses')
       }
-      console.log(schedList)
+      console.log('List of Schedules:', schedList)
       setSampleSchedules(schedList)
     }
   }

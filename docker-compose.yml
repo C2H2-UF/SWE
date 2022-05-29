@@ -19,7 +19,7 @@ services:
       - FASTPI_TITLE=FastAPI
       - FASTPI_VERSION=3.9
       - USER=${CURRENT_UID}
-    restart: "yes"
+    restart: "no"
 
 #  react:
 #    build:
@@ -30,6 +30,6 @@ services:
 #      - "3000:3000"
 #    volumes:
 #      - ./frontend/:/usr/src/app/
-#   restart: "yes"
+#   restart: "no"
 #    depends_on:
 #      - fastapi

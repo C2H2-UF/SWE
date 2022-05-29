@@ -31,7 +31,6 @@
   left: 0vw;
 }
 
-
 .listCourses {
   width: 15vw;
   height: 92vh;
@@ -86,7 +85,7 @@
   align-items: center;
 }
 
-#courseListButtons {
+#CourseListButtons {
   display: flex;
   justify-content: center;
 }

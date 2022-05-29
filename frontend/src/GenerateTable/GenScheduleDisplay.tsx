@@ -15,81 +15,112 @@ export function GenScheduleDisplay(props: {
   num: number
 }) {
   let relHeight: string = props.height.toString() + 'vh'
+  const schedArr: JSX.Element[][] = [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+  ]
 
-  //convert schedule from map to array
-  const scheduleArray: string[] = schedMapToArray(props.schedule)
+  //console.log(props.schedule.template)
+  //Loop through each day in a schedule
+  let day: string
+  let column: string[]
 
-  //Perhaps call the while async, so it doesn't hold up the rest if this takes a wee bit too long for slow PCs
-  let spliceIndex: number = 0
-  let rows: JSX.Element[] = []
-  console.log(props.schedule.template)
-  //Builds cells for non-online timeslots
-  while (spliceIndex < 84) {
-    let rowArray = scheduleArray.slice(spliceIndex, spliceIndex + 6)
-    let rowIndex = spliceIndex / 6
-    //console.log(rowIndex +": ", rowArray)
+  for ([day, column] of Object.entries(props.schedule.template)) {
+    let period = 0
+    let courses = column.map((period) => period)
+    if (day == 'ONLINE') {
+      courses.forEach((courseID) => {
+        schedArr.push([
+          <GenerateCell
+            courseID={courseID}
+            rowSpan={1}
+            colSpan={6}
+            color={props.colorMap.get(courseID)}
+          />,
+        ])
+      })
+    } else {
+      //At each day, fill up all 14 subarrays in schedArr
+      let skip = 0
+      courses.forEach((course) => {
+        let rowSpan = 1
+        let i = period
 
-    //    console.log('before: ' + spliceIndex)
-    //Generate an array of cells for one row
-    //    console.log(rowArray)
-    let cellArr: JSX.Element[] = rowArray.map((course, index) => {
-      if (course == 'REMOVE') {
-        return <></>
-      }
+        if (skip > 0) {
+          skip--
+          return
+        } else {
+          while (course != '' && courses[i + 1] == course) {
+            rowSpan++
+            courses[i + 1] = 'DELETE'
+            i++
+            skip++
+          }
 
-      let i: number = spliceIndex + index
-      let rowSize: number = 1
-      console.log(course)
-      //Account for multi-period class times
-      while (course != '' && scheduleArray[i + 6] == course) {
-        rowSize++
-        scheduleArray[i + 6] = 'REMOVE'
-        i += 6
-      }
-      //      console.log(rowIndex + ': ' + rowSize)
-      return (
-        <GenerateCell
-          courseID={course}
-          rowSpan={rowSize}
-          colSpan={1}
-          color={props.colorMap.get(course)}
-        />
-      )
-    }) //End of non-online cell creation for this row
-    spliceIndex += 6
-    //    console.log('after: ' + spliceIndex)
+          let cell: JSX.Element
+          if (course == 'DELETE') {
+            cell = <></> //Allows for overlaps from multi-period blocks
+          } else {
+            cell = (
+              <GenerateCell
+                courseID={course}
+                rowSpan={rowSpan}
+                colSpan={1}
+                color={props.colorMap.get(course)}
+              />
+            )
+          }
 
-    //Add time display to row
-    cellArr.splice(
-      0,
-      0,
-      <TableCell scope="row" style={{ width: '12%', fontSize: '1.75vh' }}>
-        <b>{periodList[rowIndex].period + ': '}</b>
-
-        {periodList[rowIndex].time}
-      </TableCell>,
-    )
-    let newRow: JSX.Element = (
-      <TableRow style={{ height: relHeight }}>{cellArr}</TableRow>
-    )
-    console.log(newRow)
-    //add row to array of rows
-    rows[rowIndex] = newRow
+          //Add cell to that particular period row
+          schedArr[period].push(cell)
+          period++
+        }
+      })
+    }
   }
 
-  //Build online rows
-  let onlineArray: JSX.Element[] = props.schedule.template.ONLINE.map(
-    (courseID) => (
-      <GenerateOnline
-        courseID={courseID}
-        color={props.colorMap.get(courseID)}
-        height={props.height}
-      />
-    ),
-  )
+  //console.log(schedArr)
+  //Create rows with each subarray
+  let rows: JSX.Element[] = []
+  let period: number = 0
 
-  rows.concat(onlineArray)
+  schedArr.forEach((row) => {
+    //console.log(period + ": ", row)
+    let label: JSX.Element
+    if (period < 14) {
+      label = (
+        <TableCell scope="row" style={{ width: '13%', fontSize: '1.75vh' }}>
+          <b>{periodList[period].period + ': '}</b>
+          <span>{periodList[period].time}</span>
+        </TableCell>
+      )
+    } else {
+      label = (
+        <TableCell scope="row" style={{ width: '12%', fontSize: '1.75vh' }}>
+          <b>{'Online: '}</b>
+        </TableCell>
+      )
+    }
 
+    row.unshift(label)
+    rows.push(<TableRow style={{ height: relHeight }}>{row}</TableRow>)
+
+    period++
+  })
+
+  //return
   return (
     <TableContainer
       component={Paper}
@@ -108,51 +139,4 @@ export function GenScheduleDisplay(props: {
       </Table>
     </TableContainer>
   )
-}
-
-//Convert schedule from a map to a 1d array
-//Every 14 indices represents one period/row (across the entire week)
-//i.e. 0-13 represents Period 1 from 7:25-815 across the entire week
-/*
-       1  |[  0 -  5,
-       2  |   6 - 11,
-       3  |  12 - 17,
-       4  |  18 - 23,
-       5  |  24 - 29,
-       6  |  30 - 35,
-       7  |  36 - 41,
-       8  |  42 - 47,
-       9  |  48 - 53,
-      10  |  54 - 59
-      11  |  60 - 65,
-      E1  |  66 - 71,
-      E2  |  72 - 77,
-      E3  |  78 - 83
-      --------------
- Online(?)|  84 - end ]
-      
-
-*/
-function schedMapToArray(schedule: Schedule) {
-  const scheduleArray: string[] = []
-  let key: string = ''
-  let value: string[] = []
-  let index: number = 0
-
-  for ([key, value] of Object.entries(schedule.template)) {
-    let i: number = index
-    value.forEach((course) => {
-      scheduleArray[i] = course
-
-      if (key == 'ONLINE') {
-        i++
-      } else {
-        i += 6
-      }
-    })
-    if (key != 'ONLINE') {
-      index++
-    }
-  }
-  return scheduleArray
 }
